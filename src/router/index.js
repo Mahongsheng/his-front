@@ -12,6 +12,7 @@ import ReturnDrug from "../components/nav_pharmacy/ReturnDrug";
 import Inspection from "../components/nav_technician/Inspection";
 import Test from "../components/nav_technician/Test";
 import Disposal from "../components/nav_technician/Disposal";
+import FareCheck from "../components/nav_registration/FareCheck"
 
 Vue.use(Router);
 
@@ -102,6 +103,13 @@ export default new Router({
         {
           path: '/home-admin/disposal',
           component: Disposal,
+          meta:{
+            title: "HIS东软云医院"
+          }
+        },
+        {
+          path: '/home-admin/fareCheck',
+          component: FareCheck,
           meta:{
             title: "HIS东软云医院"
           }
