@@ -1,9 +1,9 @@
 <template>
   <section>
     <!--工具条-->
-    <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+    <el-col :span="24" class="toolbar" style="padding-bottom: 0px;padding-left: 8px;">
       <el-form :inline="true" :model="filters">
-        <el-form-item label="挂号单信息查询">
+        <el-form-item label="挂号单信息查询" style="font-weight: bold;">
           <el-input v-model="filters.registrationFormId" placeholder="请输入挂号单号"></el-input>
         </el-form-item>
         <el-form-item>
@@ -15,17 +15,17 @@
     <!--列表-->
     <template>
       <el-table :data="data" highlight-current-row v-loading="loading" style="width: 100%;">
-        <el-table-column prop="registrationFormId" label="挂号单号" width="150"></el-table-column>
+        <el-table-column prop="registrationFormId" label="挂号单号" width="100"></el-table-column>
 
         <el-table-column prop="name" label="姓名" width="150" sortable></el-table-column>
 
         <el-table-column prop="idNumber" label="身份证号" width="150" sortable></el-table-column>
 
-        <el-table-column prop="date" label="挂号日期" width="180" sortable></el-table-column>
+        <el-table-column prop="date" label="挂号日期" width="150" sortable></el-table-column>
 
         <el-table-column prop="department" label="看诊科室" width="150" sortable></el-table-column>
 
-        <el-table-column prop="status" label="看诊状态" min-width="50" sortable></el-table-column>
+        <el-table-column prop="status" label="看诊状态" min-width="100" sortable></el-table-column>
 
         <el-table-column min-width="50">
           <el-button type="primary" v-if="patient.status === '未就诊'" @click="backRegistrate">退号</el-button>
