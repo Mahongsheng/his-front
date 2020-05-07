@@ -9,6 +9,14 @@
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" v-on:click="getPatient()">查询</el-button>
         </el-form-item>
+        <el-form-item>
+          <el-button
+            type="primary"
+            icon="el-icon-goods"
+            @click="pay"
+            style="margin-left: 350px"
+          >退费结算</el-button>
+        </el-form-item>
       </el-form>
     </el-col>
 
@@ -41,11 +49,37 @@
 
         <el-table-column prop="status" label="状态" min-width="120"></el-table-column>
 
-        <el-table-column label="操作" width="120">
+        <!-- <el-table-column label="操作" width="120">
           <template scope="scope">
             <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">退费</el-button>
           </template>
-        </el-table-column>
+        </el-table-column> -->
+
+        <el-dialog
+          title="退费信息确认"
+          :visible.sync="dialogFormVisible"
+          width="600px"
+          :append-to-body="true"
+          center
+        >
+          <el-form :model="paymentForm">
+            <el-form-item label="病历号：" :label-width="formLabelWidth">
+              <el-input v-model="filters.medicalRecord_id" style="width: 200px"></el-input>
+            </el-form-item>
+            <el-form-item label="患者姓名：" :label-width="formLabelWidth">
+              <el-input v-model="patient.name" style="width: 200px"></el-input>
+            </el-form-item>
+            <el-form-item label="应退金额：" :label-width="formLabelWidth">
+              <el-input v-model="paymentForm.shouldPay" style="width: 200px"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogClick">退 款</el-button>
+          </div>
+        </el-dialog>
+
+
       </el-table>
     </template>
   </section>
@@ -137,7 +171,56 @@ export default {
           type: "success"
         });
       });
-    }
+    },
+
+    dialogClick() {
+      this.dialogFormVisible = false;
+
+      this.paymentItem = [
+        {
+          name: "蒲地蓝消炎口服液",
+          price: 40.2,
+          number: 1,
+          time: "2020-5-1",
+          status: "已退费",
+          total_price: 40.2
+        },
+        {
+          name: "奥美拉唑胶囊",
+          price: 17,
+          number: 2,
+          time: "2020-5-1",
+          status: "已退费",
+          total_price: 34
+        },
+        {
+          name: "头孢拉定胶囊",
+          price: 7.7,
+          number: 1,
+          time: "2020-5-1",
+          status: "已退费",
+          total_price: 7.7
+        }
+      ];
+      this.$message({
+        message: "缴费成功！",
+        type: "success"
+      });
+    },
+
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    pay() {
+      if (this.multipleSelection == null) {
+        this.$message.error("请选择退费项目！");
+      } else {
+        this.dialogFormVisible = true;
+        this.multipleSelection.forEach(item => {
+          this.paymentForm.shouldPay += item.total_price;
+        });
+      }
+    },
   }
 };
 </script>
