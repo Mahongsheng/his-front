@@ -12,6 +12,8 @@ import ReturnDrug from "../components/nav_pharmacy/ReturnDrug";
 import Inspection from "../components/nav_technician/Inspection";
 import Test from "../components/nav_technician/Test";
 import Disposal from "../components/nav_technician/Disposal";
+import Settlement from "../components/nav_registration/Settlement.vue";
+import Settlement_history from "../components/nav_registration/Settlement_history.vue";
 
 Vue.use(Router);
 
@@ -106,7 +108,20 @@ export default new Router({
             title: "HIS东软云医院"
           }
         },
-
+         {
+           path: '/home-admin/settlement',
+           component: Settlement,
+           meta:{
+             title:"HIS东软云医院"
+           }
+         },
+         {
+           path: '/home-admin/settlement_history',
+           component: Settlement_history,
+           meta:{
+             title:"HIS东软云医院"
+           }
+         },
       ]
     }
   ]

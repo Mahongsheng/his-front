@@ -7,6 +7,8 @@
         <el-menu-item index="/home-admin/back_registration">退号</el-menu-item>
         <el-menu-item index="/home-admin/pay">收费</el-menu-item>
         <el-menu-item index="/home-admin/refund">退费</el-menu-item>
+		<el-menu-item index="/home-admin/settlement">日结</el-menu-item>
+		<el-menu-item index="/home-admin/settlement_history">日结历史</el-menu-item>
       </el-submenu>
       <el-submenu index="2">
         <template slot="title"><i class="el-icon-user-solid"></i>门诊医生工作站</template>
