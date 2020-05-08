@@ -1,6 +1,5 @@
 <template>
   <el-form label-position="right" :model="form" :rules="rules" ref="form" label-width="80px" class="demo-ruleForm">
-
     <el-row>
       <el-col :span="7">
         <el-form-item label="病历号" prop="medicalRecord">
