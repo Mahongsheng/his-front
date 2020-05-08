@@ -1,226 +1,197 @@
 <template>
   <section>
-    <!--工具条-->
-    <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-      <el-form :inline="true" :model="filters">
-        <el-form-item label="病历号：">
-          <el-input v-model="filters.medicalRecord_id" placeholder="请输入病历号"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" icon="el-icon-search" v-on:click="getPatient()">查询</el-button>
-        </el-form-item>
-        <el-form-item>
-          <el-button
-            type="primary"
-            icon="el-icon-goods"
-            @click="pay"
-            style="margin-left: 600px"
-          >收费结算</el-button>
-        </el-form-item>
+      <el-form :model="form" :inline="true">
+          <el-col style="font-size:24px; padding-bottom: 40px">费用查询</el-col>
+          <el-row>
+              <el-col :span="6">
+                <el-form-item label="病历号：">
+                    <el-input v-model="form.id" placeholder="请输入病历号"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                  <el-form-item label="开始日期（选填）：">
+                    <el-date-picker
+                    v-model="form.dateStart"
+                    type="date"
+                    placeholder="选择日期">
+                    </el-date-picker>
+                  </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                  <el-form-item label="结束日期（选填）：">
+                    <el-date-picker
+                    v-model="form.dateEnd"
+                    type="date"
+                    placeholder="选择日期">
+                    </el-date-picker>
+                  </el-form-item>
+              </el-col>
+              <el-col :offset="19" :span="2">
+                  <el-form-item>
+                    <el-button
+                        type="primary"
+                        icon="el-icon-goods"
+                        @click="search"
+                    >费用查询</el-button>
+                  </el-form-item>
+              </el-col>
+          </el-row>
+          <!-- <el-row>
+              <el-form-item>
+                <el-button
+                    type="primary"
+                    icon="el-icon-goods"
+                    @click="search"
+                    style="margin-left: 600px"
+                >退费结算</el-button>
+              </el-form-item>
+          </el-row> -->
+
       </el-form>
-    </el-col>
+      <el-divider></el-divider>
+      <el-form :model="resultForm" :inline="true">
+        <el-row>
+            <el-col style="font-size:24px; padding-bottom: 40px" :span="3">查询结果</el-col>
+            <el-col :offset="13" :span="6">
+                <el-form-item label="合计：">
+                    <el-input v-model="resultForm.totalMoney"></el-input>
+                </el-form-item>
 
-    <!--列表-->
-    <template>
-      <el-table
-        ref="multipleTable"
-        :data="paymentItem"
-        highlight-current-row
-        v-loading="loading"
-        tooltip-effect="dark"
-        style="width: 100%;"
-        @selection-change="handleSelectionChange"
-      >
-        <el-table-column type="selection" width="55"></el-table-column>
-
-        <el-table-column label="病历号" width="80">{{filters.medicalRecord_id}}</el-table-column>
-
-        <el-table-column label="姓名" width="120">{{patient.name}}</el-table-column>
-
-        <el-table-column prop="name" label="项目名称" width="150"></el-table-column>
-
-        <el-table-column prop="price" label="单价" width="120" sortable></el-table-column>
-
-        <el-table-column prop="number" label="数量" width="120" sortable></el-table-column>
-
-        <el-table-column prop="time" label="开立时间" min-width="120" sortable></el-table-column>
-
-        <el-table-column prop="status" label="状态" min-width="120"></el-table-column>
-
-        <el-dialog
-          title="发票信息（交费）"
-          :visible.sync="dialogFormVisible"
-          width="600px"
-          :append-to-body="true"
-          center
-        >
-          <el-form :model="paymentForm">
-            <el-form-item label="病历号：" :label-width="formLabelWidth">
-              <el-input v-model="filters.medicalRecord_id" style="width: 200px"></el-input>
-            </el-form-item>
-            <el-form-item label="患者姓名：" :label-width="formLabelWidth">
-              <el-input v-model="patient.name" style="width: 200px"></el-input>
-            </el-form-item>
-            <el-form-item label="支付方式" :label-width="formLabelWidth">
-              <el-select v-model="paymentForm.methodPay" placeholder="请选择支付方式">
-                <el-option value="现金" label="现金">现金</el-option>
-                <el-option value="微信" label="微信">微信</el-option>
-                <el-option value="支付宝" label="支付宝">支付宝</el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="应收金额：" :label-width="formLabelWidth">
-              <el-input v-model="paymentForm.shouldPay" style="width: 200px"></el-input>
-            </el-form-item>
-            <el-form-item label="实收金额：" :label-width="formLabelWidth">
-              <el-input
-                v-model="paymentForm.actualPay"
-                style="width: 200px"
-                @change="calculateChange"
-              ></el-input>
-            </el-form-item>
-            <el-form-item label="找零金额：" :label-width="formLabelWidth">
-              <el-input v-model="paymentForm.change" style="width: 200px"></el-input>
-            </el-form-item>
-          </el-form>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogClick">支 付</el-button>
-          </div>
-        </el-dialog>
-      </el-table>
-    </template>
+            </el-col>
+        </el-row>
+      </el-form>
+       <template>
+            <el-table
+            :data="tableResult"
+            style="width: 100%"
+            highlight-current-row
+            tooltip-effect="dark">
+            <el-table-column
+                prop="date"
+                label="收费时间"
+                width="180">
+            </el-table-column>
+            <el-table-column
+                label="病历号"
+                width="180">{{form.id}}
+            </el-table-column>
+            <el-table-column
+                prop="name"
+                label="患者姓名">
+            </el-table-column>
+            <el-table-column
+                prop="itemName"
+                label="收费项目">
+            </el-table-column>
+            <el-table-column
+                prop="unitPrice"
+                label="项目单价">
+            </el-table-column>
+            <el-table-column
+                prop="number"
+                label="项目数量">
+            </el-table-column>
+            <el-table-column
+                prop="total"
+                label="项目总额">
+            </el-table-column>
+            </el-table>
+        </template>
   </section>
 </template>
+
 <script>
 import axios from "axios";
 import qs from "qs";
 
 export default {
   data() {
-    return {
-      filters: {
-        medicalRecord_id: "",
-        others_id: 1
-      },
-      patient: {
-        patient_id: "",
-        name: "",
-        idNumber: ""
-      },
-      loading: false,
-      paymentItem: [],
-      multipleSelection: null,
-      dialogFormVisible: false,
-      formLabelWidth: "100px",
-      paymentForm: {
-        shouldPay: 0,
-        actualPay: 0,
-        methodPay: "",
-        change: 0
-      }
-    };
-  },
-  methods: {
-    //获取用户病历信息
-    getPatient() {
-      this.loading = true;
-
-      setTimeout(() => {
-        this.patient.patient_id = this.filters.medicalRecord_id;
-        this.patient.name = "小明";
-        this.patient.idNumber = "";
-        this.getPaymentItem();
-
-        this.$message({
-          message: "已获取病历信息！",
-          type: "success"
-        });
-      }, 1500);
-    },
-    getPaymentItem() {
-      this.paymentItem = [
-        {
-          name: "蒲地蓝消炎口服液",
-          price: 40.2,
-          number: 1,
-          time: "2020-5-1",
-          status: "未缴费",
-          total_price: 40.2
+      return {
+        tableResult: [],
+        form:{
+            dateStart: '',
+            dateEnd: '',
+            id: ''
         },
-        {
-          name: "奥美拉唑胶囊",
-          price: 17,
-          number: 2,
-          time: "2020-5-1",
-          status: "未缴费",
-          total_price: 34
-        },
-        {
-          name: "头孢拉定胶囊",
-          price: 7.7,
-          number: 1,
-          time: "2020-5-1",
-          status: "未缴费",
-          total_price: 7.7
+        resultForm:{
+            totalMoney: ''
         }
-      ];
-      this.loading = false;
+          
+      };
     },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
-    },
-    pay() {
-      if (this.multipleSelection == null) {
-        this.$message.error("请选择缴费项目！");
-      } else {
-        this.dialogFormVisible = true;
-        this.multipleSelection.forEach(item => {
-          this.paymentForm.shouldPay += item.total_price;
+    methods:{
+        search(){
+         if (this.form.dateStart=='') {
+            this.resultForm.totalMoney = 0
+            this.tableResult = [{
+            date: '2020-05-07',
+            name: '李明',
+            itemName: '挂号',
+            unitPrice: 1,
+            number: 1,
+            total: 1
+          }, {
+            date: '2020-05-05',
+            name: '李明',
+            itemName: '莲花清胶囊',
+            unitPrice: 9,
+            number: 1,
+            total: 9
+          }, {
+            date: '2020-05-01',
+            name: '李明',
+            itemName: '999感冒颗粒',
+            unitPrice: 10,
+            number: 1,
+            total: 10
+          }, {
+            date: '2020-04-29',
+            name: '李明',
+            itemName: '999感冒颗粒',
+            unitPrice: 10,
+            number: 1,
+            total: 10
+          },{
+            date: '2020-01-12',
+            name: '李明',
+            itemName: '彩超',
+            unitPrice: 130,
+            number: 1,
+            total: 130
+          }];
+          this.tableResult.forEach(item => {
+          this.resultForm.totalMoney += item.total;
         });
-      }
-    },
-
-    dialogClick() {
-      this.dialogFormVisible = false;
-
-      this.paymentItem = [
-        {
-          name: "蒲地蓝消炎口服液",
-          price: 40.2,
-          number: 1,
-          time: "2020-5-1",
-          status: "已缴费",
-          total_price: 40.2
-        },
-        {
-          name: "奥美拉唑胶囊",
-          price: 17,
-          number: 2,
-          time: "2020-5-1",
-          status: "已缴费",
-          total_price: 34
-        },
-        {
-          name: "头孢拉定胶囊",
-          price: 7.7,
-          number: 1,
-          time: "2020-5-1",
-          status: "已缴费",
-          total_price: 7.7
+         } else {
+            this.resultForm.totalMoney = 0
+            this.tableResult = [{
+            date: '2020-05-07',
+            name: '李明',
+            itemName: '挂号',
+            unitPrice: 1,
+            number: 1,
+            total: 1
+          }, {
+            date: '2020-05-05',
+            name: '李明',
+            itemName: '莲花清胶囊',
+            unitPrice: 9,
+            number: 1,
+            total: 9
+          }, {
+            date: '2020-05-01',
+            name: '李明',
+            itemName: '999感冒颗粒',
+            unitPrice: 10,
+            number: 1,
+            total: 10
+          }];
+          this.tableResult.forEach(item => {
+          this.resultForm.totalMoney += item.total;
+        });
+         }
+            
         }
-      ];
-      this.$message({
-        message: "缴费成功！",
-        type: "success"
-      });
-    },
-
-    calculateChange() {
-      this.paymentForm.change = (
-        parseFloat(this.paymentForm.actualPay) -
-        parseFloat(this.paymentForm.shouldPay)
-      ).toFixed(1);
     }
-  }
 };
 </script>

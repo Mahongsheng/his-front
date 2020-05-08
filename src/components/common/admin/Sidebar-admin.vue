@@ -7,8 +7,14 @@
         <el-menu-item index="/home-admin/back_registration">退号</el-menu-item>
         <el-menu-item index="/home-admin/pay">收费</el-menu-item>
         <el-menu-item index="/home-admin/refund">退费</el-menu-item>
+<<<<<<< HEAD
         <el-menu-item index="/home-admin/settlement">日结</el-menu-item>
         <el-menu-item index="/home-admin/settlement_history">日结历史</el-menu-item>
+=======
+		<el-menu-item index="/home-admin/settlement">日结</el-menu-item>
+		<el-menu-item index="/home-admin/settlement_history">日结历史</el-menu-item>
+        <el-menu-item index="/home-admin/fareCheck">费用查询</el-menu-item>
+>>>>>>> 9b39d86c910b43dd7135751a25c747fdaa556260
       </el-submenu>
       <el-submenu index="2">
         <template slot="title"><i class="el-icon-user-solid"></i>门诊医生工作站</template>
