@@ -10,7 +10,8 @@
         <el-form-item label="姓名" prop="name">
           <el-input v-model="form.name" placeholder="姓名"></el-input>
         </el-form-item>
-      </div></el-col>
+        </div>
+      </el-col>
       <el-col :span="7">
         <el-form-item label="性别" prop="sex">
           <el-select v-model="form.sex" placeholder="性别">
@@ -25,8 +26,8 @@
     <el-row>
       <el-col :span="7">
         <el-form-item label="出生日期" prop="birth">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.birth" style="width: 100%;"
-                              value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="setAge(form.birth)"></el-date-picker>
+          <el-date-picker type="date" placeholder="选择日期" v-model="form.birth" style="width: 100%;" value-format="yyyy-MM-dd"
+            format="yyyy-MM-dd" @change="setAge(form.birth)"></el-date-picker>
         </el-form-item>
       </el-col>
       <el-col :span="7">
@@ -43,32 +44,32 @@
 
     <el-row>
       <el-col :span="7">
-      <el-form-item label="住址">
-        <el-input v-model="form.address" placeholder="住址"></el-input>
-      </el-form-item>
+        <el-form-item label="住址">
+          <el-input v-model="form.address" placeholder="住址"></el-input>
+        </el-form-item>
       </el-col>
       <el-col :span="7">
-      <el-form-item label="看诊日期" prop="date">
-        <el-date-picker type="date" placeholder="选择日期" v-model="form.date" style="width: 100%;" value-format="yyyy-MM-dd"
-          format="yyyy-MM-dd"></el-date-picker>
-      </el-form-item>
+        <el-form-item label="看诊日期" prop="date">
+          <el-date-picker type="date" placeholder="选择日期" v-model="form.date" style="width: 100%;" value-format="yyyy-MM-dd"
+            format="yyyy-MM-dd"></el-date-picker>
+        </el-form-item>
       </el-col>
       <el-col :span="7">
-      <el-form-item label="科室" prop="department">
-        <el-select v-model="form.department" placeholder="科室">
-          <el-option v-for="(item, index) in departmentList" :value="item.id" :label="item.name" :key="index"></el-option>
-        </el-select>
-      </el-form-item>
+        <el-form-item label="科室" prop="department">
+          <el-select v-model="form.department" placeholder="科室">
+            <el-option v-for="(item, index) in departmentList" :value="item.id" :label="item.name" :key="index"></el-option>
+          </el-select>
+        </el-form-item>
       </el-col>
     </el-row>
 
     <el-row>
       <el-col :span="7">
-      <el-form-item label="号别" prop="registeredLevel">
-        <el-select v-model="form.registeredLevel" placeholder="号别" @change="setMoney(form.registeredLevel)">
-          <el-option v-for="(item, index) in registeredLevelList" :value="item.id" :label="item.level" :key="index"></el-option>
-        </el-select>
-      </el-form-item>
+        <el-form-item label="号别" prop="registeredLevel">
+          <el-select v-model="form.registeredLevel" placeholder="号别" @change="setMoney(form.registeredLevel)">
+            <el-option v-for="(item, index) in registeredLevelList" :value="item.id" :label="item.level" :key="index"></el-option>
+          </el-select>
+        </el-form-item>
       </el-col>
       <el-col :span="7">
         <el-form-item label="看诊医生" prop="doctor">
@@ -194,7 +195,7 @@
       };
     },
     created: function() {
-      this.getData();
+      this.form.medicalRecord = 6100000;
     },
     methods: {
       /*提交挂号*/
@@ -207,6 +208,7 @@
               type: 'success'
             });
             this.$refs[formName].resetFields();
+            this.form.medicalRecord++;
           } else {
             this.$message.error('请检查挂号信息是否正确！');
             return false;
@@ -226,10 +228,14 @@
           }
         });
       },
-      setAge(birthday){
+      setAge(birthday) {
         var birthYear = birthday.substr(0, 4);
         var nowDate = new Date();
-        this.form.age = nowDate.getFullYear() - birthYear;
+        var hisAge = nowDate.getFullYear() - birthYear;
+        if (hisAge < 0) {
+          this.$message.error('出生日期输入错误！');
+        } else
+          this.form.age = nowDate.getFullYear() - birthYear;
       }
     }
   }

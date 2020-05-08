@@ -130,8 +130,6 @@ export default new Router({
             title: "HIS东软云医院"
           }
         },
-
-
       ]
     }
   ]

@@ -40,12 +40,12 @@
         <el-col :span="16">
           <h1>查询结果</h1>
         </el-col>
-        <el-col :span="3">
-          <h1>{{wholeMoney}}</h1>
+        <el-col :span="4">
+          <el-tag  style="margin: 16px 10px 0px 4px;font-size: 14px;">合计：{{wholeMoney}}</el-tag>
         </el-col>
         <el-col :span="4" style="height: 61.84px;">
           <el-button type="primary" icon="el-icon-s-order" @click="handleSettlement" style="margin-block-start: 0.83em;
-    margin-block-end: 0.83em;margin-left: 34px;">结算报账</el-button>
+    margin-block-end: 0.83em;">结算报账</el-button>
           <!-- <h1>合计100元</h1> -->
         </el-col>
       </el-row>
@@ -99,7 +99,7 @@
     methods: {
       querySettlement() {
         this.loading = true;
-
+        
         setTimeout(() => {
           this.settlementItem = [{
               count: '1',
@@ -126,7 +126,8 @@
               payType: '医保'
             }
           ];
-          this.wholeMoney = "合计：100元";
+          this.wholeMoney = "100元";
+
           this.$message({
             message: "已获取日结信息",
             type: "success"
