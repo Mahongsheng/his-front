@@ -12,8 +12,12 @@ import ReturnDrug from "../components/nav_pharmacy/ReturnDrug";
 import Inspection from "../components/nav_technician/Inspection";
 import Test from "../components/nav_technician/Test";
 import Disposal from "../components/nav_technician/Disposal";
+<<<<<<< HEAD
 import Settlement from "../components/nav_registration/Settlement.vue";
 import Settlement_history from "../components/nav_registration/Settlement_history.vue";
+=======
+import FareCheck from "../components/nav_registration/FareCheck"
+>>>>>>> e9c6db87105ef8a9f3669f406c45fec836eabeee
 
 Vue.use(Router);
 
@@ -108,6 +112,7 @@ export default new Router({
             title: "HIS东软云医院"
           }
         },
+<<<<<<< HEAD
          {
            path: '/home-admin/settlement',
            component: Settlement,
@@ -122,6 +127,16 @@ export default new Router({
              title:"HIS东软云医院"
            }
          },
+=======
+        {
+          path: '/home-admin/fareCheck',
+          component: FareCheck,
+          meta:{
+            title: "HIS东软云医院"
+          }
+        },
+
+>>>>>>> e9c6db87105ef8a9f3669f406c45fec836eabeee
       ]
     }
   ]

@@ -15,7 +15,7 @@
             icon="el-icon-goods"
             @click="pay"
             style="margin-left: 600px"
-          >退费结算</el-button>
+          >收费结算</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -43,20 +43,12 @@
 
         <el-table-column prop="number" label="数量" width="120" sortable></el-table-column>
 
-        <el-table-column prop="total_price" label="总金额" width="120" sortable></el-table-column>
-
         <el-table-column prop="time" label="开立时间" min-width="120" sortable></el-table-column>
 
         <el-table-column prop="status" label="状态" min-width="120"></el-table-column>
 
-        <!-- <el-table-column label="操作" width="120">
-          <template scope="scope">
-            <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">退费</el-button>
-          </template>
-        </el-table-column> -->
-
         <el-dialog
-          title="退费信息确认"
+          title="发票信息（交费）"
           :visible.sync="dialogFormVisible"
           width="600px"
           :append-to-body="true"
@@ -69,17 +61,32 @@
             <el-form-item label="患者姓名：" :label-width="formLabelWidth">
               <el-input v-model="patient.name" style="width: 200px"></el-input>
             </el-form-item>
-            <el-form-item label="应退金额：" :label-width="formLabelWidth">
+            <el-form-item label="支付方式" :label-width="formLabelWidth">
+              <el-select v-model="paymentForm.methodPay" placeholder="请选择支付方式">
+                <el-option value="现金" label="现金">现金</el-option>
+                <el-option value="微信" label="微信">微信</el-option>
+                <el-option value="支付宝" label="支付宝">支付宝</el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="应收金额：" :label-width="formLabelWidth">
               <el-input v-model="paymentForm.shouldPay" style="width: 200px"></el-input>
+            </el-form-item>
+            <el-form-item label="实收金额：" :label-width="formLabelWidth">
+              <el-input
+                v-model="paymentForm.actualPay"
+                style="width: 200px"
+                @change="calculateChange"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="找零金额：" :label-width="formLabelWidth">
+              <el-input v-model="paymentForm.change" style="width: 200px"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogClick">退 款</el-button>
+            <el-button type="primary" @click="dialogClick">支 付</el-button>
           </div>
         </el-dialog>
-
-
       </el-table>
     </template>
   </section>
@@ -103,6 +110,7 @@ export default {
       loading: false,
       paymentItem: [],
       multipleSelection: null,
+      dialogFormVisible: false,
       formLabelWidth: "100px",
       paymentForm: {
         shouldPay: 0,
@@ -129,7 +137,6 @@ export default {
         });
       }, 1500);
     },
-
     getPaymentItem() {
       this.paymentItem = [
         {
@@ -137,7 +144,7 @@ export default {
           price: 40.2,
           number: 1,
           time: "2020-5-1",
-          status: "已缴费",
+          status: "未缴费",
           total_price: 40.2
         },
         {
@@ -145,7 +152,7 @@ export default {
           price: 17,
           number: 2,
           time: "2020-5-1",
-          status: "已缴费",
+          status: "未缴费",
           total_price: 34
         },
         {
@@ -153,24 +160,24 @@ export default {
           price: 7.7,
           number: 1,
           time: "2020-5-1",
-          status: "已缴费",
+          status: "未缴费",
           total_price: 7.7
         }
       ];
       this.loading = false;
     },
-
-   
-    handleDel: function(index, row) {
-      this.$confirm("请确认是否退费?", "提示", {
-        type: "warning"
-      }).then(() => {
-        row.status = "退费";
-        this.$message({
-          message: "退费成功",
-          type: "success"
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    pay() {
+      if (this.multipleSelection == null) {
+        this.$message.error("请选择缴费项目！");
+      } else {
+        this.dialogFormVisible = true;
+        this.multipleSelection.forEach(item => {
+          this.paymentForm.shouldPay += item.total_price;
         });
-      });
+      }
     },
 
     dialogClick() {
@@ -182,7 +189,7 @@ export default {
           price: 40.2,
           number: 1,
           time: "2020-5-1",
-          status: "已退费",
+          status: "已缴费",
           total_price: 40.2
         },
         {
@@ -190,7 +197,7 @@ export default {
           price: 17,
           number: 2,
           time: "2020-5-1",
-          status: "已退费",
+          status: "已缴费",
           total_price: 34
         },
         {
@@ -198,7 +205,7 @@ export default {
           price: 7.7,
           number: 1,
           time: "2020-5-1",
-          status: "已退费",
+          status: "已缴费",
           total_price: 7.7
         }
       ];
@@ -208,19 +215,12 @@ export default {
       });
     },
 
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
-    },
-    pay() {
-      if (this.multipleSelection == null) {
-        this.$message.error("请选择退费项目！");
-      } else {
-        this.dialogFormVisible = true;
-        this.multipleSelection.forEach(item => {
-          this.paymentForm.shouldPay += item.total_price;
-        });
-      }
-    },
+    calculateChange() {
+      this.paymentForm.change = (
+        parseFloat(this.paymentForm.actualPay) -
+        parseFloat(this.paymentForm.shouldPay)
+      ).toFixed(1);
+    }
   }
 };
 </script>
