@@ -4,7 +4,7 @@
       <el-row class="toolbar">
         <el-form :inline="true" :model="filters">
           <el-form-item>
-            <el-input v-model="filters.name" placeholder="请输入项目名称"></el-input>
+            <el-input v-model="filters.name" placeholder="请输入费用科目名称"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" v-on:click="searchItem" icon="el-icon-search">查询</el-button>
@@ -25,19 +25,11 @@
       >
         <el-table-column type="selection" width="55"></el-table-column>
 
-        <el-table-column type="index" align="center"></el-table-column>
+        <el-table-column type="index"></el-table-column>
 
-        <el-table-column prop="number" label="项目编码" align="center"></el-table-column>
+        <el-table-column prop="number" label="费用科目编码" align="center"></el-table-column>
 
-        <el-table-column prop="name" label="项目名称" align="center"></el-table-column>
-
-        <el-table-column prop="unit" label="规格" align="center"></el-table-column>
-
-        <el-table-column prop="price" label="单价" align="center"></el-table-column>
-
-        <el-table-column prop="department" label="执行科目" align="center"></el-table-column>
-
-        <el-table-column prop="type" label="执行类型" align="center"></el-table-column>
+        <el-table-column prop="name" label="费用科目名称" align="center"></el-table-column>
 
         <el-table-column label="操作" align="center">
           <template scope="scope">
@@ -67,47 +59,14 @@
         title="编辑"
         :visible.sync="editFormVisible"
         :close-on-click-modal="false"
-        width="550px"
+        width="400px"
       >
-        <el-form :model="editForm" label-width="80px" ref="editForm">
-          <el-form-item label="项目编码">
+        <el-form :model="editForm" label-width="100px" ref="editForm">
+          <el-form-item label="费用科目编码">
             <el-input v-model="editForm.number" auto-complete="off"></el-input>
           </el-form-item>
-          <el-form-item label="项目名称">
+          <el-form-item label="费用科目名称">
             <el-input v-model="editForm.name" auto-complete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="规格">
-            <el-select v-model="editForm.unit" placeholder="请选择">
-              <el-option
-                v-for="item in unitOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="单价">
-            <el-input v-model="editForm.price" auto-complete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="执行科目">
-            <el-select v-model="editForm.department" placeholder="请选择">
-              <el-option
-                v-for="item in departmentOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="项目类型">
-            <el-select v-model="editForm.type" placeholder="请选择">
-              <el-option
-                v-for="item in typeOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -118,50 +77,17 @@
 
       <!-- 新增界面 -->
       <el-dialog
-        title="新增医技项目"
+        title="新增费用科目"
         :visible.sync="addFormVisible"
         :close-on-click-modal="false"
-        width="550px"
+        width="400px"
       >
-        <el-form :model="addForm" label-width="80px" ref="addForm">
-          <el-form-item label="项目编码">
+        <el-form :model="addForm" label-width="100px" ref="addForm">
+          <el-form-item label="费用科目编码">
             <el-input v-model="addForm.number" auto-complete="off"></el-input>
           </el-form-item>
-          <el-form-item label="项目名称">
+          <el-form-item label="费用科目名称">
             <el-input v-model="addForm.name" auto-complete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="规格">
-            <el-select v-model="addForm.unit" placeholder="请选择">
-              <el-option
-                v-for="item in unitOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="单价">
-            <el-input v-model="addForm.price" auto-complete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="执行科目">
-            <el-select v-model="addForm.department" placeholder="请选择">
-              <el-option
-                v-for="item in departmentOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="项目类型">
-            <el-select v-model="addForm.type" placeholder="请选择">
-              <el-option
-                v-for="item in typeOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -176,7 +102,7 @@
 <style scoped>
 .components-container {
   /* background-color: #f0f2f5; */
-  min-height: calc(100vh - 110px);
+  min-height: calc(100vh - 120px);
 }
 
 .toolbar {
@@ -207,58 +133,8 @@ export default {
       searchLoading: false,
       item: [],
       multipleSelection: [],
-      unitOptions: [
-        {
-          value: "日",
-          label: "日"
-        },
-        {
-          value: "次",
-          label: "次"
-        },
-        {
-          value: "每个部位",
-          label: "每个部位"
-        },
-        {
-          value: "小时",
-          label: "小时"
-        },
-        {
-          value: "半小时",
-          label: "半小时"
-        }
-      ],
-
-      departmentOptions: [
-        {
-          value: "护理科",
-          label: "护理科"
-        },
-        {
-          value: "放射科",
-          label: "放射科"
-        },
-        {
-          value: "检验科",
-          label: "检验科"
-        }
-      ],
-
-      typeOptions: [
-        {
-          value: "检查",
-          label: "检查"
-        },
-        {
-          value: "处置",
-          label: "处置"
-        },
-        {
-          value: "检验",
-          label: "检验"
-        }
-      ],
+      total: 2,
+      page: 1,
 
       //编辑界面
       editFormVisible: false,
@@ -266,11 +142,7 @@ export default {
       editFormNumber: 0,
       editForm: {
         number: "",
-        name: "",
-        unit: "",
-        price: 0,
-        department: "",
-        type: ""
+        name: ""
       },
 
       //新增界面
@@ -278,11 +150,7 @@ export default {
       addLoading: false,
       addForm: {
         number: "",
-        name: "",
-        unit: "",
-        price: 0,
-        department: "",
-        type: ""
+        name: ""
       }
     };
   },
@@ -290,92 +158,44 @@ export default {
   created() {
     this.itemTable = [
       {
-        number: 120200001,
-        name: "大抢救",
-        unit: "日",
-        price: 200.0,
-        department: "护理科",
-        type: "处置"
+        number: "GHF",
+        name: "挂号费"
       },
       {
-        number: 120200002,
-        name: "中抢救",
-        unit: "日",
-        price: 150.0,
-        department: "护理科",
-        type: "处置"
+        number: "ZLF",
+        name: "诊疗费"
       },
       {
-        number: 120200003,
-        name: "小抢救",
-        unit: "日",
-        price: 80.0,
-        department: "护理科",
-        type: "处置"
+        number: "JYF",
+        name: "检验费"
       },
       {
-        number: 120300001,
-        name: "中心吸氧",
-        unit: "小时",
-        price: 2.5,
-        department: "护理科",
-        type: "处置"
+        number: "JYCLF",
+        name: "检验材料费"
       },
       {
-        number: 120300002,
-        name: "低流量吸氧",
-        unit: "小时",
-        price: 2.0,
-        department: "护理科",
-        type: "处置"
+        number: "MRIJCF",
+        name: "MRI检查费"
       },
       {
-        number: 210101001,
-        name: "普通透视",
-        unit: "每个部位",
-        price: 5.0,
-        department: "放射科",
-        type: "检查"
+        number: "MRICLF",
+        name: "MRI材料费"
       },
       {
-        number: 210101002,
-        name: "食管钡餐透视",
-        unit: "次",
-        price: 15.0,
-        department: "放射科",
-        type: "检查"
+        number: "XYF",
+        name: "西药费"
       },
       {
-        number: 210101003,
-        name: "床旁透视透视与术中透视",
-        unit: "半小时",
-        price: 40.0,
-        department: "放射科",
-        type: "检查"
+        number: "ZCYF",
+        name: "中成药费"
       },
       {
-        number: 210103018,
-        name: "X浆肾素活性测定",
-        unit: "次",
-        price: 80.0,
-        department: "检验科",
-        type: "检验"
+        number: "CZF",
+        name: "处置费"
       },
       {
-        number: 210103020,
-        name: "促红细胞生成素测定",
-        unit: "次",
-        price: 50.0,
-        department: "检验科",
-        type: "检验"
-      },
-      {
-        number: 210103021,
-        name: "睾酮测定",
-        unit: "次",
-        price: 80.0,
-        department: "检验科",
-        type: "检验"
+        number: "MZF",
+        name: "麻醉费"
       }
     ];
   },
@@ -383,7 +203,6 @@ export default {
   methods: {
     handleCurrentChange(val) {
       this.page = val;
-      this.getUsers();
     },
 
     //查询
@@ -407,7 +226,7 @@ export default {
           });
         } else {
           this.$message({
-            message: "无此医技项目",
+            message: "查询失败",
             type: "error"
           });
         }
@@ -416,7 +235,7 @@ export default {
 
     //删除
     handleDelete: function(index, row) {
-      this.$confirm("确认删除该项目吗?", "提示", {
+      this.$confirm("确认是否删除该费用科目?", "提示", {
         type: "warning"
       }).then(() => {
         this.searchLoading = true;
@@ -455,10 +274,6 @@ export default {
               if (item.number == this.editFormNumber) {
                 item.number = this.editForm.number;
                 item.name = this.editForm.name;
-                item.unit = this.editForm.unit;
-                item.price = this.editForm.price;
-                item.department = this.editForm.department;
-                item.type = this.editForm.type;
               }
             });
 

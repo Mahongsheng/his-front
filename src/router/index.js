@@ -17,6 +17,7 @@ import Settlement_history from "../components/nav_registration/Settlement_histor
 import FareCheck from "../components/nav_registration/FareCheck"
 import Technician_manage from "../components/nav_technician/Manage"
 import DepartmentCheck from "../components/nav_finance/departmentCheck.vue"
+import ExpenseManage from "../components/nav_finance/ExpenseManage.vue"
 
 
 Vue.use(Router);
@@ -143,6 +144,13 @@ export default new Router({
         {
           path: '/home-admin/departmentCheck',
           component: DepartmentCheck,
+          meta:{
+            title: "HIS东软云医院"
+          }
+        },
+        {
+          path: '/home-admin/expense-manage',
+          component: ExpenseManage,
           meta:{
             title: "HIS东软云医院"
           }

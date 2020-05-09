@@ -30,6 +30,7 @@
             icon="el-icon-success"
             style="float: left"
             @click="multiExecute()"
+            :disabled="this.multipleSelection.length===0"
           >批量执行</el-button>
         </el-tag>
         <el-table
@@ -154,7 +155,7 @@ export default {
       },
       loading: false,
       inspectionItem: [],
-      multipleSelection: null,
+      multipleSelection: [],
       dialogFormVisible: false,
       resultForm: ""
     };
