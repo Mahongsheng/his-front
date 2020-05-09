@@ -16,6 +16,8 @@ import Settlement from "../components/nav_registration/Settlement.vue";
 import Settlement_history from "../components/nav_registration/Settlement_history.vue";
 import FareCheck from "../components/nav_registration/FareCheck"
 import Technician_manage from "../components/nav_technician/Manage"
+import DepartmentCheck from "../components/nav_finance/departmentCheck.vue"
+
 
 Vue.use(Router);
 
@@ -138,6 +140,15 @@ export default new Router({
             title: "HIS东软云医院"
           }
         },
+        {
+          path: '/home-admin/departmentCheck',
+          component: DepartmentCheck,
+          meta:{
+            title: "HIS东软云医院"
+          }
+        },
+
+
       ]
     }
   ]
