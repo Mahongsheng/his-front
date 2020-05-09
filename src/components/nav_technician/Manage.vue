@@ -52,7 +52,7 @@
         width="550px"
       >
         <el-form :model="editForm" label-width="80px" ref="editForm">
-          <el-form-item label="项目编码" prop="number">
+          <el-form-item label="项目编码">
             <el-input v-model="editForm.number" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="项目名称">
@@ -106,7 +106,7 @@
         width="550px"
       >
         <el-form :model="addForm" label-width="80px" ref="addForm">
-          <el-form-item label="项目编码" prop="number">
+          <el-form-item label="项目编码">
             <el-input v-model="addForm.number" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item label="项目名称">
@@ -245,6 +245,7 @@ export default {
       //编辑界面
       editFormVisible: false,
       editLoading: false,
+      editFormNumber: 0,
       editForm: {
         number: "",
         name: "",
@@ -411,6 +412,7 @@ export default {
     //显示编辑界面
     handleEdit: function(index, row) {
       this.editFormVisible = true;
+      this.editFormNumber = row.number;
       this.editForm = Object.assign({}, row);
     },
 
@@ -427,7 +429,7 @@ export default {
 
           setTimeout(() => {
             this.itemTable.forEach(item => {
-              if (item.number == this.editForm.number) {
+              if (item.number == this.editFormNumber) {
                 item.number = this.editForm.number;
                 item.name = this.editForm.name;
                 item.unit = this.editForm.unit;
