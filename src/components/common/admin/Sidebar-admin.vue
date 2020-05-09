@@ -20,6 +20,7 @@
         <el-menu-item index="/home-admin/inspection">患者检查</el-menu-item>
         <el-menu-item index="/home-admin/test">患者检验</el-menu-item>
         <el-menu-item index="/home-admin/disposal">患者处置</el-menu-item>
+         <el-menu-item index="/home-admin/technician-manage">医技管理</el-menu-item>
       </el-submenu>
       <el-submenu index="4">
         <template slot="title"><i class="el-icon-s-order"></i>门诊药房工作站</template>

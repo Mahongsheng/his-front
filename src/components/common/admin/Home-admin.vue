@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
       <v-head></v-head>
-      <el-container class="container">
+      <el-container class="container" style="width:100%">
         <el-aside width="220px"><v-sidebar></v-sidebar></el-aside>
         <el-main><router-view/></el-main>
       </el-container>

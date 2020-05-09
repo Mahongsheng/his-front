@@ -15,6 +15,7 @@ import Disposal from "../components/nav_technician/Disposal";
 import Settlement from "../components/nav_registration/Settlement.vue";
 import Settlement_history from "../components/nav_registration/Settlement_history.vue";
 import FareCheck from "../components/nav_registration/FareCheck"
+import Technician_manage from "../components/nav_technician/Manage"
 
 Vue.use(Router);
 
@@ -24,14 +25,14 @@ export default new Router({
       path: '/',
       redirect: '/login',
       component: Login,
-      meta:{
+      meta: {
         title: "HIS东软云医院"
       }
     },
     {
       path: '/login',
       component: Login,
-      meta:{
+      meta: {
         title: "HIS东软云医院"
       }
     },
@@ -42,91 +43,98 @@ export default new Router({
         {
           path: '/home-admin/registration',
           component: Registration,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
         {
           path: '/home-admin/back_registration',
           component: Back_registration,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
         {
           path: '/home-admin/pay',
           component: Pay,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
         {
           path: '/home-admin/refund',
           component: Refund,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
         {
           path: '/home-admin/medicalRecord',
           component: MedicalRecord,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
         {
           path: '/home-admin/dispenseDrug',
           component: DispenseDrug,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
         {
           path: '/home-admin/returnDrug',
           component: ReturnDrug,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
         {
           path: '/home-admin/inspection',
           component: Inspection,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
         {
           path: '/home-admin/test',
           component: Test,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
         {
           path: '/home-admin/disposal',
           component: Disposal,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
-         {
-           path: '/home-admin/settlement',
-           component: Settlement,
-           meta:{
-             title:"HIS东软云医院"
-           }
-         },
-         {
-           path: '/home-admin/settlement_history',
-           component: Settlement_history,
-           meta:{
-             title:"HIS东软云医院"
-           }
-         },
+        {
+          path: '/home-admin/technician-manage',
+          component: Technician_manage,
+          meta: {
+            title: "HIS东软云医院"
+          }
+        },
+        {
+          path: '/home-admin/settlement',
+          component: Settlement,
+          meta: {
+            title: "HIS东软云医院"
+          }
+        },
+        {
+          path: '/home-admin/settlement_history',
+          component: Settlement_history,
+          meta: {
+            title: "HIS东软云医院"
+          }
+        },
         {
           path: '/home-admin/fareCheck',
           component: FareCheck,
-          meta:{
+          meta: {
             title: "HIS东软云医院"
           }
         },
