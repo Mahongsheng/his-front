@@ -3,7 +3,7 @@
         <el-form :model="form" :inline="true">
           <el-col style="font-size:24px; padding-bottom: 40px">查询条件</el-col>
           <el-row>
-              <el-col :span="6">
+              <el-col :span="8">
                 <el-form-item label="统计类型：">
                     <el-select v-model="value" placeholder="请选择">
                         <el-option
