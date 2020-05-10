@@ -1,10 +1,10 @@
 <template>
   <div>
-    <el-row class="settlement_block">
-      <el-row>
-        <h1>查询条件</h1>
-      </el-row>
-      <el-row>
+    <el-row>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <h1 class="el-icon-edit" style="font-weight: bold;"> 查询条件</h1>
+        </div>
         <el-form ref="querySettlementForm" :model="querySettlementForm" label-width="70px" label-position="left">
           <el-row :gutter="10">
             <el-col :span="6">
@@ -31,26 +31,25 @@
             </el-col>
           </el-row>
         </el-form>
-      </el-row>
+      </el-card>
     </el-row>
 
-    <el-row class="settlement_block" style="height: 300px;">
-
-      <el-row align="bottom">
-        <el-col :span="16">
-          <h1>查询结果</h1>
-        </el-col>
-        <el-col :span="4">
-          <el-tag  style="margin: 16px 10px 0px 4px;font-size: 14px;">合计：{{wholeMoney}}</el-tag>
-        </el-col>
-        <el-col :span="4" style="height: 61.84px;">
-          <el-button type="primary" icon="el-icon-s-order" @click="handleSettlement" style="margin-block-start: 0.83em;
-    margin-block-end: 0.83em;">结算报账</el-button>
-          <!-- <h1>合计100元</h1> -->
-        </el-col>
-      </el-row>
-
-      <el-row>
+    <el-row style="margin-top: 30px;">
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <el-row align="bottom">
+            <el-col :span="16">
+              <h1 class="el-icon-paperclip" style="font-weight: bold;"> 查询结果</h1>
+            </el-col>
+            <el-col :span="3">
+              <el-tag style="margin: 16px 5px 0px 4px;font-size: 14px;">合计：{{wholeMoney}}</el-tag>
+            </el-col>
+            <el-col :span="4" style="height: 61.84px;">
+              <el-button type="primary" icon="el-icon-s-order" @click="handleSettlement" style="margin-block-start: 0.83em;margin-left: 33px;">结算报账</el-button>
+              <!-- <h1>合计100元</h1> -->
+            </el-col>
+          </el-row>
+        </div>
         <template>
           <el-table :data="settlementItem" highlight-current-row v-loading="loading" style="width: 100%;">
             <el-table-column prop="count" label="#" width="100"></el-table-column>
@@ -67,11 +66,9 @@
 
           </el-table>
         </template>
-      </el-row>
+      </el-card>
     </el-row>
   </div>
-
-
 </template>
 
 <script>
@@ -79,7 +76,7 @@
     data() {
       return {
         loading: false,
-        wholeMoney:'',
+        wholeMoney: '',
         querySettlementForm: {
           startTime: '',
           endTime: '',
@@ -99,7 +96,7 @@
     methods: {
       querySettlement() {
         this.loading = true;
-        
+
         setTimeout(() => {
           this.settlementItem = [{
               count: '1',
@@ -135,9 +132,9 @@
           this.loading = false;
         }, 1500);
       },
-      handleSettlement(){
+      handleSettlement() {
         this.loading = true;
-        setTimeout(()=>{
+        setTimeout(() => {
           this.settlementItem = [];
           this.wholeMoney = '';
           this.$message({
@@ -153,9 +150,9 @@
 
 <style>
   .settlement_block {
-    border: 3px solid #364766;
+    border: 2px solid #364766;
     border-radius: 10px;
-    padding: 10px 0px 0 40px;
+    padding: 10px 20px 0 20px;
     margin-top: 20px;
   }
 </style>

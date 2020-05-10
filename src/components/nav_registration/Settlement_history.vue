@@ -1,9 +1,9 @@
 <template>
   <div>
-    <el-row class="settlement_block">
-      <el-row>
-        <h1>查询条件</h1>
-      </el-row>
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <h1 class="el-icon-edit" style="font-weight: bold;"> 查询条件</h1>
+      </div>
       <el-row>
         <el-form ref="querySettleHistForm" :model="querySettleHistForm" label-width="70px" label-position="left">
           <el-row :gutter="10">
@@ -32,14 +32,14 @@
           </el-row>
         </el-form>
       </el-row>
-    </el-row>
+    </el-card>
 
-    <el-row>
-      <el-col :span="8" class="settlement_block" style="padding-left: 0px; height: 300px;">
-        <el-row>
-          <h1 style="padding-left: 40px;">日结历史</h1>
-        </el-row>
-        <el-row>
+    <el-row style="margin-top: 30px;">
+      <el-col :span="8">
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <h1 class="el-icon-date" style="font-weight: bold;"> 日结历史</h1>
+          </div>
           <template>
             <el-table :data="settlementHistItem" highlight-current-row v-loading="hist_loading" style="width: 100%;"
               @current-change="querySettlement">
@@ -48,18 +48,20 @@
               <el-table-column prop="histDate" label="日期" width="115" sortable></el-table-column>
             </el-table>
           </template>
-        </el-row>
+        </el-card>
       </el-col>
-      <el-col :span="15" class="settlement_block" style="margin-left: 40px; padding-left: 0px;height: 300px;">
-        <el-row>
-          <el-col :span="18">
-            <h1 style="padding-left: 40px;">日结明细</h1>
-          </el-col>
-          <el-col :span="6">
-            <el-tag  style="margin: 20px 10px 0px 4px;font-size: 14px;">合计：{{wholeMoney}}</el-tag>
-          </el-col>
-        </el-row>
-        <el-row>
+      <el-col :span="15" style="margin-left: 42px;">
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <el-row>
+              <el-col :span="18">
+                <h1 class="el-icon-paperclip" style="font-weight: bold;"> 日结明细</h1>
+              </el-col>
+              <el-col :span="6">
+                <el-tag style="margin-top: 10px; font-size: 14px;">合计：{{wholeMoney}}</el-tag>
+              </el-col>
+            </el-row>
+          </div>
           <template>
             <el-table :data="settlementItem" highlight-current-row v-loading="settlement_loading" style="width: 100%;">
               <el-table-column prop="count" label="#" align="center" width="50"></el-table-column>
@@ -76,7 +78,7 @@
 
             </el-table>
           </template>
-        </el-row>
+        </el-card>
       </el-col>
     </el-row>
   </div>
@@ -173,9 +175,9 @@
 
 <style>
   .settlement_block {
-    border: 3px solid #364766;
+    border: 2px solid #364766;
     border-radius: 10px;
-    padding: 10px 0 0 40px;
+    padding: 10px 20px 0 20px;
     margin-top: 20px;
   }
 </style>
