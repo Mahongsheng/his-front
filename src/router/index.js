@@ -20,6 +20,8 @@ import DepartmentCheck from "../components/nav_finance/departmentCheck.vue"
 import ExpenseManage from "../components/nav_finance/ExpenseManage.vue"
 import ManageDrug from "../components/nav_pharmacy/ManageDrug";
 import DailyCheck from "../components/nav_finance/DailyCheck";
+import DoctorCheck from "../components/nav_finance/DoctorCheck";
+
 
 Vue.use(Router);
 
@@ -166,6 +168,13 @@ export default new Router({
         {
           path: '/home-admin/dailyCheck',
           component: DailyCheck,
+          meta:{
+            title: "HIS东软云医院"
+          }
+        },
+        {
+          path: '/home-admin/doctorCheck',
+          component: DoctorCheck,
           meta:{
             title: "HIS东软云医院"
           }

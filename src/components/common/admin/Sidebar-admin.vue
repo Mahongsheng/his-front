@@ -33,6 +33,7 @@
         <el-menu-item index="/home-admin/expense-manage">费用科目管理</el-menu-item>
         <el-menu-item index="/home-admin/dailyCheck">日结核对</el-menu-item>
         <el-menu-item index="/home-admin/departmentCheck">门诊科室工作量统计</el-menu-item>
+        <el-menu-item index="/home-admin/doctorCheck">门诊医生工作量统计</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
