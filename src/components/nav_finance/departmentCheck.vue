@@ -37,7 +37,7 @@
                   <el-form-item>
                     <el-button
                         type="primary"
-                        icon="el-icon-goods"
+                        icon="el-icon-search"
                         @click="search"
                     >查询</el-button>
                   </el-form-item>
