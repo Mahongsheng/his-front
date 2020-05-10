@@ -3,12 +3,12 @@
     <el-menu :default-active="$route.path" class="el-menu-vertical-demo" unique-opened router @select="handleSelect">
       <el-submenu index="1">
         <template slot="title"><i class="el-icon-menu"></i>门诊挂号收费</template>
-        <el-menu-item index="/home-admin/registration">现场挂号</el-menu-item>
-        <el-menu-item index="/home-admin/back_registration">退号</el-menu-item>
+        <el-menu-item index="/home-admin/registration">门诊挂号</el-menu-item>
+        <el-menu-item index="/home-admin/back_registration">门诊退号</el-menu-item>
         <el-menu-item index="/home-admin/pay">收费</el-menu-item>
         <el-menu-item index="/home-admin/refund">退费</el-menu-item>
-        <el-menu-item index="/home-admin/settlement">日结</el-menu-item>
-        <el-menu-item index="/home-admin/settlement_history">日结历史</el-menu-item>
+        <el-menu-item index="/home-admin/settlement">收费员日结</el-menu-item>
+        <el-menu-item index="/home-admin/settlement_history">日结历史查询</el-menu-item>
         <el-menu-item index="/home-admin/fareCheck">费用查询</el-menu-item>
       </el-submenu>
       <el-submenu index="2">

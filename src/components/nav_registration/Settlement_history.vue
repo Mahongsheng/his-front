@@ -10,13 +10,13 @@
             <el-col :span="6">
               <el-form-item label="起始时间">
                 <el-date-picker type="date" placeholder="选择起始时间" v-model="querySettleHistForm.startTime" style="width: 100%;"
-                  value-format="yyyy-MM-dd" format="yyyy-MM-dd"></el-date-picker>
+                  value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="checkQueryHistDate"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item label="终止时间">
                 <el-date-picker type="date" placeholder="选择终止时间" v-model="querySettleHistForm.endTime" style="width: 100%;"
-                  value-format="yyyy-MM-dd" format="yyyy-MM-dd"></el-date-picker>
+                  value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="checkQueryHistDate"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :span="6">
@@ -113,6 +113,19 @@
       }
     },
     methods: {
+      checkQueryHistDate() {
+        var startStr = this.querySettleHistForm.startTime.toString();
+        var endStr = this.querySettleHistForm.endTime.toString();
+        startStr = startStr.replace('/-/g', '/');
+        endStr = endStr.replace('/-/g', '/');
+        var startTimeDate = new Date(startStr).getTime();
+        var endTimeDate = new Date(endStr).getTime();
+        if (startTimeDate > endTimeDate) {
+          this.$message.error('无效查询日期！');
+          this.querySettleHistForm.startTime = "";
+          this.querySettleHistForm.endTime = "";
+        }
+      },
       querySettleHist() {
         this.hist_loading = true;
         setTimeout(() => {

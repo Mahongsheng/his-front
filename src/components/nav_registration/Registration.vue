@@ -1,13 +1,13 @@
 <template>
   <el-card class="box-card">
     <div slot="header" class="clearfix">
-      <h1 class="el-icon-paperclip" style="font-weight: bold;"> 门诊挂号</h1>
+      <h1 class="el-icon-paperclip" style="font-weight: bold;" disabled> 门诊挂号</h1>
     </div>
     <el-form label-position="right" :model="form" :rules="rules" ref="form" label-width="80px" class="demo-ruleForm">
       <el-row>
         <el-col :span="7">
           <el-form-item label="病历号" prop="medicalRecord" >
-            <el-input v-model="form.medicalRecord" placeholder="病历号" @change="getPatientInfo(form.medicalRecord)"></el-input>
+            <el-input v-model="form.medicalRecord" placeholder="病历号" @change="getPatientInfo(form.medicalRecord)" :disabled="true"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="7">
@@ -25,8 +25,6 @@
           </el-form-item>
         </el-col>
       </el-row>
-    
-    
       <el-row>
         <el-col :span="7">
           <el-form-item label="出生日期" prop="birth">
@@ -45,7 +43,7 @@
           </el-form-item>
         </el-col>
       </el-row>
-    
+
       <el-row>
         <el-col :span="7">
           <el-form-item label="住址">
@@ -55,7 +53,7 @@
         <el-col :span="7">
           <el-form-item label="看诊日期" prop="date">
             <el-date-picker type="date" placeholder="选择日期" v-model="form.date" style="width: 100%;" value-format="yyyy-MM-dd"
-              format="yyyy-MM-dd"></el-date-picker>
+              format="yyyy-MM-dd" @change="checkRegistDate"></el-date-picker>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -66,7 +64,7 @@
           </el-form-item>
         </el-col>
       </el-row>
-    
+
       <el-row>
         <el-col :span="7">
           <el-form-item label="号别" prop="registeredLevel">
@@ -88,7 +86,6 @@
           </el-form-item>
         </el-col>
       </el-row>
-    
       <el-form-item>
         <el-button type="primary" @click="submitForm('form')">挂号</el-button>
         <el-button @click="resetForm('form')">清空</el-button>
@@ -220,11 +217,9 @@
           }
         });
       },
-
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-
       /*获取挂号级别后自动显示应缴费金额*/
       setMoney(levelId) {
         this.registeredLevelList.forEach(item => {
@@ -234,13 +229,30 @@
         });
       },
       setAge(birthday) {
-        var birthYear = birthday.substr(0, 4);
-        var nowDate = new Date();
-        var hisAge = nowDate.getFullYear() - birthYear;
-        if (hisAge < 0) {
-          this.$message.error('出生日期输入错误！');
-        } else
-          this.form.age = nowDate.getFullYear() - birthYear;
+        var remindTime = birthday;//自己选择的时间
+        var str = remindTime.toString();        // toString
+        str = str.replace('/-/g', '/');         //去空格字符等
+        var oldTime = new Date(str).getTime();  //装date
+        //    进行比较
+        if (oldTime > new Date().getTime()) {
+          this.$message.error('无效出生日期！');
+          this.form.date = "";
+        }else{
+          var birthYear = birthday.substr(0, 4);
+          var hisAge = new Date().getFullYear() - birthYear + 1;
+          this.form.age = hisAge;
+        }
+      },
+      checkRegistDate(){
+        var remindTime = this.form.date;//自己选择的时间
+        var str = remindTime.toString();        // toString
+        str = str.replace('/-/g', '/');//去空格字符等
+        var oldTime = new Date(str).getTime();  //装date
+        //    进行比较
+        if (oldTime <= new Date().getTime()) {
+          this.$message.error('无效挂号日期！');
+          this.form.date = "";
+        }
       }
     }
   }

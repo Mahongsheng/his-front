@@ -5,18 +5,18 @@
         <div slot="header" class="clearfix">
           <h1 class="el-icon-edit" style="font-weight: bold;"> 查询条件</h1>
         </div>
-        <el-form ref="querySettlementForm" :model="querySettlementForm" label-width="70px" label-position="left">
+        <el-form :model="querySettlementForm" ref="querySettlementForm" label-width="70px" label-position="left">
           <el-row :gutter="10">
             <el-col :span="6">
               <el-form-item label="起始时间">
                 <el-date-picker type="date" placeholder="选择起始时间" v-model="querySettlementForm.startTime" style="width: 100%;"
-                  value-format="yyyy-MM-dd" format="yyyy-MM-dd"></el-date-picker>
+                  value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="checkQueryDate"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item label="终止时间">
                 <el-date-picker type="date" placeholder="选择终止时间" v-model="querySettlementForm.endTime" style="width: 100%;"
-                  value-format="yyyy-MM-dd" format="yyyy-MM-dd"></el-date-picker>
+                  value-format="yyyy-MM-dd" format="yyyy-MM-dd" @change="checkQueryDate"></el-date-picker>
               </el-form-item>
             </el-col>
             <el-col :span="6">
@@ -80,7 +80,7 @@
         querySettlementForm: {
           startTime: '',
           endTime: '',
-          operator: '',
+          operator: ''
         },
         settlementItem: [],
         settlementInfo: {
@@ -94,6 +94,19 @@
       }
     },
     methods: {
+      checkQueryDate() {
+        var startStr = this.querySettlementForm.startTime.toString();
+        var endStr = this.querySettlementForm.endTime.toString();
+        startStr = startStr.replace('/-/g', '/');
+        endStr = endStr.replace('/-/g', '/');
+        var startTimeDate = new Date(startStr).getTime();
+        var endTimeDate = new Date(endStr).getTime();
+        if (startTimeDate > endTimeDate) {
+          this.$message.error('无效查询日期！');
+          this.querySettlementForm.startTime = "";
+          this.querySettlementForm.endTime = "";
+        }
+      },
       querySettlement() {
         this.loading = true;
 
@@ -147,12 +160,3 @@
     }
   }
 </script>
-
-<style>
-  .settlement_block {
-    border: 2px solid #364766;
-    border-radius: 10px;
-    padding: 10px 20px 0 20px;
-    margin-top: 20px;
-  }
-</style>
