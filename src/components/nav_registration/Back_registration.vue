@@ -2,14 +2,15 @@
   <section>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <el-form :inline="true" :model="filters" style="padding-bottom: 0px;">
-          <el-form-item label="挂号单信息查询" style="font-weight: bold;">
-            <el-input v-model="filters.registrationFormId" placeholder="请输入挂号单号"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" v-on:click="getPatient()">查询</el-button>
-          </el-form-item>
-        </el-form>
+        <el-row>
+          <el-col :span="16">
+            <h1 class="el-icon-paperclip" style="font-weight: bold;"> 门诊退号</h1>
+          </el-col>
+          <el-col :span="8">
+            <el-button type="primary" v-on:click="getPatient()" style="float: right;">查询</el-button>
+            <el-input v-model="filters.registrationFormId" placeholder="请输入挂号单号" style="float: right;width: 50%;margin-right: 10px;"></el-input>
+          </el-col>
+        </el-row>
       </div>
       <template>
         <el-table :data="data" highlight-current-row v-loading="loading" style="width: 100%;">
