@@ -26,10 +26,12 @@
         <template slot="title"><i class="el-icon-s-order"></i>门诊药房工作站</template>
         <el-menu-item index="/home-admin/dispenseDrug">发药</el-menu-item>
         <el-menu-item index="/home-admin/returnDrug">退药</el-menu-item>
+        <el-menu-item index="/home-admin/manageDrug">药品管理</el-menu-item>
       </el-submenu>
       <el-submenu index="5">
         <template slot="title"><i class="el-icon-s-marketing"></i>门诊财务管理</template>
         <el-menu-item index="/home-admin/expense-manage">费用科目管理</el-menu-item>
+        <el-menu-item index="/home-admin/dailyCheck">日结核对</el-menu-item>
         <el-menu-item index="/home-admin/departmentCheck">门诊科室工作量统计</el-menu-item>
       </el-submenu>
     </el-menu>
