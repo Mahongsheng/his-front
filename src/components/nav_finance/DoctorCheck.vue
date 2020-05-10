@@ -4,7 +4,7 @@
           <el-col style="font-size:24px; padding-bottom: 40px">查询条件</el-col>
           <el-row>
               <el-col :span="8">
-                  <el-form-item label="开始日期（选填）：">
+                  <el-form-item label="开始日期：">
                     <el-date-picker
                     v-model="form.dateStart"
                     type="date"
@@ -13,7 +13,7 @@
                   </el-form-item>
               </el-col>
               <el-col :span="8">
-                  <el-form-item label="结束日期（选填）：">
+                  <el-form-item label="结束日期：">
                     <el-date-picker
                     v-model="form.dateEnd"
                     type="date"
