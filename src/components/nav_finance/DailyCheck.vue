@@ -44,7 +44,7 @@
       <el-form :inline="true" :model="filters">
         <el-form-item label="日结时间范围：">
           <el-col :span="6"><el-input size="large" placeholder="起始日期" v-model="filters.startDate" :disabled="true"></el-input></el-col>
-          <el-col :span="12">至</el-col>
+          <el-col :span="6" offset="6">至</el-col>
           <el-col :span="6"><el-input size="large" placeholder="结束日期" v-model="filters.endDate" :disabled="true"></el-input></el-col>
         </el-form-item>
       </el-form>
@@ -78,7 +78,7 @@
       <el-form :inline="true" :model="filters">
         <el-form-item label="起始发票号：">
           <el-col :span="6"><el-input size="large" placeholder="" v-model="filters.fromInvoiceNum" :disabled="true"></el-input></el-col>
-          <el-col :span="12">至</el-col>
+          <el-col :span="6" offset="6">至</el-col>
           <el-col :span="6"><el-input size="large" placeholder="" v-model="filters.toInvoiceNum" :disabled="true"></el-input></el-col>
         </el-form-item>
         <el-form-item label="共计：">
