@@ -64,7 +64,7 @@
           <el-col><el-input placeholder="收费员" v-model="filters.clerkName" :disabled="true"></el-input></el-col>
         </el-form-item>
         <el-form-item label="制表时间：">
-          <el-col><el-input placeholder="收费员" v-model="filters.tableDate" :disabled="true"></el-input></el-col>
+          <el-col><el-input placeholder="" v-model="filters.tableDate" :disabled="true"></el-input></el-col>
         </el-form-item>
       </el-form>
     </el-row>
