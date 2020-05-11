@@ -48,7 +48,7 @@
         <el-table-column prop="status" label="状态" min-width="120"></el-table-column>
 
         <el-dialog
-          title="发票信息（交费）"
+          title="缴费确认"
           :visible.sync="dialogFormVisible"
           width="600px"
           :append-to-body="true"
