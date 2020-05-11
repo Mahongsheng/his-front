@@ -6,9 +6,13 @@
     <el-col :span="6">
       <div class="user-info">
         <el-dropdown trigger="click" @command="handleCommand">
-          <span class="el-dropdown-link" style="color: #364766;" v-text="user.username + '医生'"></span>
+
+          <span class="el-dropdown-link" style="color: #364766;"><img src="../../assets/logo.svg" class="logo" ></span>
+
+
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="logout">退出登陆</el-dropdown-item>
+            <el-dropdown-item command="logout" v-text="'用户： ' + user.username + '医生'" disabled="true" style="color: #364766"></el-dropdown-item>
+            <el-dropdown-item command="logout" divided="true">退出登陆</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -21,6 +25,7 @@
   export default {
     data() {
       return {
+        img_src: "../../assets/logo.svg",
         user: {
           username: "",
           permission: ""
@@ -81,14 +86,14 @@
     color: #fff;
   }
 
-  .user-info .el-dropdown-link {
-    position: relative;
-    display: inline-block;
-    padding-left: 50px;
-    color: #fff;
-    cursor: pointer;
-    vertical-align: middle;
-  }
+  /*.user-info .el-dropdown-link {*/
+  /*  position: relative;*/
+  /*  display: inline-block;*/
+  /*  padding-left: 50px;*/
+  /*  color: #fff;*/
+  /*  cursor: pointer;*/
+  /*  vertical-align: middle;*/
+  /*}*/
 
   .user-info .user-logo {
     position: absolute;
@@ -129,5 +134,12 @@
     to {
       opacity: 0.7;
     }
+  }
+
+
+  .logo {
+    width: 35px;
+    vertical-align: middle;
+    margin-left: 10px;
   }
 </style>

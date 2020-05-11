@@ -1,6 +1,7 @@
 <template>
   <section>
     <!--工具条-->
+    <el-col style="font-size:22px; font-weight: bold; padding-bottom: 40px">门诊退费</el-col>
     <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
       <el-form :inline="true" :model="filters">
         <el-form-item label="病历号：">
@@ -19,7 +20,7 @@
         </el-form-item>
       </el-form>
     </el-col>
-
+    
     <!--列表-->
     <template>
       <el-table
@@ -33,19 +34,19 @@
       >
         <el-table-column type="selection" width="55"></el-table-column>
 
-        <el-table-column label="病历号" width="80">{{filters.medicalRecord_id}}</el-table-column>
+        <el-table-column label="病历号" width="130">{{filters.medicalRecord_id}}</el-table-column>
 
-        <el-table-column label="姓名" width="120">{{patient.name}}</el-table-column>
+        <el-table-column label="姓名" width="150">{{patient.name}}</el-table-column>
 
-        <el-table-column prop="name" label="项目名称" width="150"></el-table-column>
+        <el-table-column prop="name" label="项目名称" width="250"></el-table-column>
 
-        <el-table-column prop="price" label="单价" width="120" sortable></el-table-column>
+        <el-table-column prop="price" label="单价" width="150" sortable></el-table-column>
 
-        <el-table-column prop="number" label="数量" width="120" sortable></el-table-column>
+        <el-table-column prop="number" label="数量" width="150" sortable></el-table-column>
 
-        <el-table-column prop="total_price" label="总金额" width="120" sortable></el-table-column>
+        <el-table-column prop="total_price" label="总金额" width="150" sortable></el-table-column>
 
-        <el-table-column prop="time" label="开立时间" min-width="120" sortable></el-table-column>
+        <el-table-column prop="time" label="开立时间" min-width="250" sortable></el-table-column>
 
         <el-table-column prop="status" label="状态" min-width="120"></el-table-column>
 
@@ -139,7 +140,7 @@ export default {
           name: "蒲地蓝消炎口服液",
           price: 40.2,
           number: 1,
-          time: "2020-5-1",
+          time: "2020-5-1 10:00:00",
           status: "已缴费",
           total_price: 40.2
         },
@@ -147,7 +148,7 @@ export default {
           name: "奥美拉唑胶囊",
           price: 17,
           number: 2,
-          time: "2020-5-1",
+          time: "2020-5-1 10:00:00",
           status: "已缴费",
           total_price: 34
         },
@@ -155,7 +156,7 @@ export default {
           name: "头孢拉定胶囊",
           price: 7.7,
           number: 1,
-          time: "2020-5-1",
+          time: "2020-5-1 10:00:00",
           status: "已缴费",
           total_price: 7.7
         }
