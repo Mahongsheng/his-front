@@ -1,7 +1,7 @@
 <template>
   <section>
       <el-form :model="form" :inline="true">
-          <el-col style="font-size:24px; padding-bottom: 40px">费用查询</el-col>
+          <el-col style="font-size:24px; font-weight: bold; padding-bottom: 40px">费用查询</el-col>
           <el-row>
               <el-col :span="6">
                 <el-form-item label="病历号：">
@@ -51,7 +51,7 @@
       <el-divider></el-divider>
       <el-form :model="resultForm" :inline="true">
         <el-row>
-            <el-col style="font-size:24px; padding-bottom: 40px" :span="3">查询结果</el-col>
+            <el-col style="font-size:24px; padding-bottom: 40px; font-weight: bold" :span="3">查询结果</el-col>
             <el-col :offset="13" :span="6">
                 <el-form-item label="合计：">
                     <el-input v-model="resultForm.totalMoney"></el-input>
