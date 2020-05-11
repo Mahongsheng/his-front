@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    HIS 东软云医院
+    <div class="glowIn">HIS 东软云医院</div>
     <div class="user-info">
       <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link" v-text="user.username"></span>
@@ -57,8 +57,18 @@
     font-size: 22px;
     line-height: 70px;
     color: #fff;
-    background-color: #242f42;
+    background: linear-gradient(to top right,  #d3dce6, #e5e9f2, #99a9bf);
     margin: 0;
+
+
+    filter:alpha(Opacity=85);
+    -moz-opacity:0.75;
+    opacity: 0.75;
+
+    /*background-image: url("../../assets/bg2.jpg");*/
+    /*background-size: 100% 100%;*/
+    /*position: fixed;*/
+
   }
 
   .user-info {
@@ -88,5 +98,30 @@
 
   .el-dropdown-menu__item {
     text-align: center;
+  }
+
+  .glowIn {
+    color: #364766;
+    font-size: 30px;
+    font-font-weight: bolder;
+    animation: glow-in 0.8s both;
+
+  }
+
+
+  @keyframes glow-in {
+    from {
+      opacity: 0;
+    }
+    65% {
+      opacity: 1;
+      text-shadow: 0 0 25px white;
+    }
+    75% {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.7;
+    }
   }
 </style>

@@ -21,6 +21,7 @@ import ExpenseManage from "../components/nav_finance/ExpenseManage.vue"
 import ManageDrug from "../components/nav_pharmacy/ManageDrug";
 import DailyCheck from "../components/nav_finance/DailyCheck";
 import DoctorCheck from "../components/nav_finance/DoctorCheck";
+import Initial from "../components/nav_intial/Initial";
 
 
 Vue.use(Router);
@@ -46,6 +47,13 @@ export default new Router({
       path: '/home-admin',
       component: Home_admin,
       children: [
+        {
+          path: '/home-admin/initial',
+          component: Initial,
+          meta: {
+            title: "HIS东软云医院"
+          }
+        },
         {
           path: '/home-admin/registration',
           component: Registration,
