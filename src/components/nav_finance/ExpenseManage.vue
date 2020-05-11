@@ -176,26 +176,6 @@ export default {
       {
         number: "MRIJCF",
         name: "MRI检查费"
-      },
-      {
-        number: "MRICLF",
-        name: "MRI材料费"
-      },
-      {
-        number: "XYF",
-        name: "西药费"
-      },
-      {
-        number: "ZCYF",
-        name: "中成药费"
-      },
-      {
-        number: "CZF",
-        name: "处置费"
-      },
-      {
-        number: "MZF",
-        name: "麻醉费"
       }
     ];
   },

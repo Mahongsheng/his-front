@@ -328,54 +328,6 @@ export default {
         price: 2.0,
         department: "护理科",
         type: "处置"
-      },
-      {
-        number: 210101001,
-        name: "普通透视",
-        unit: "每个部位",
-        price: 5.0,
-        department: "放射科",
-        type: "检查"
-      },
-      {
-        number: 210101002,
-        name: "食管钡餐透视",
-        unit: "次",
-        price: 15.0,
-        department: "放射科",
-        type: "检查"
-      },
-      {
-        number: 210101003,
-        name: "床旁透视透视与术中透视",
-        unit: "半小时",
-        price: 40.0,
-        department: "放射科",
-        type: "检查"
-      },
-      {
-        number: 210103018,
-        name: "X浆肾素活性测定",
-        unit: "次",
-        price: 80.0,
-        department: "检验科",
-        type: "检验"
-      },
-      {
-        number: 210103020,
-        name: "促红细胞生成素测定",
-        unit: "次",
-        price: 50.0,
-        department: "检验科",
-        type: "检验"
-      },
-      {
-        number: 210103021,
-        name: "睾酮测定",
-        unit: "次",
-        price: 80.0,
-        department: "检验科",
-        type: "检验"
       }
     ];
   },
