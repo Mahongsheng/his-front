@@ -62,21 +62,39 @@
         }
         this.loading = true;
         this.data = [];
+        if(this.filters.registrationFormId == 2){
+          setTimeout(() => {
+            this.patient.registrationFormId = this.filters.registrationFormId;
+            this.patient.name = "小明";
+            this.patient.idNumber = "2";
+            this.patient.date = "2020-5-2";
+            this.patient.department = "心血管内科";
+            this.patient.status = "已就诊";
+            this.data.push(this.patient);
+            this.loading = false;
+            this.$message({
+              message: "已获取挂号单信息！",
+              type: "success"
+            });
+          }, 1500);
 
-        setTimeout(() => {
-          this.patient.registrationFormId = this.filters.registrationFormId;
-          this.patient.name = "小明";
-          this.patient.idNumber = "1";
-          this.patient.date = "2020-5-1";
-          this.patient.department = "心血管内科";
-          this.patient.status = "未就诊";
-          this.data.push(this.patient);
-          this.loading = false;
-          this.$message({
-            message: "已获取挂号单信息！",
-            type: "success"
-          });
-        }, 1500);
+          return;
+        }else{
+          setTimeout(() => {
+            this.patient.registrationFormId = this.filters.registrationFormId;
+            this.patient.name = "小明";
+            this.patient.idNumber = "1";
+            this.patient.date = "2020-5-1";
+            this.patient.department = "心血管内科";
+            this.patient.status = "未就诊";
+            this.data.push(this.patient);
+            this.loading = false;
+            this.$message({
+              message: "已获取挂号单信息！",
+              type: "success"
+            });
+          }, 1500);
+        }
       },
 
       backRegistrate() {

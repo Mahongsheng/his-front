@@ -34,7 +34,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="年龄" prop="age">
-            <el-input v-model="form.age" placeholder="年龄"></el-input>
+            <el-input v-model="form.age" placeholder="年龄" @change="checkAge"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -46,7 +46,7 @@
 
       <el-row>
         <el-col :span="8">
-          <el-form-item label="住址">
+          <el-form-item label="住址" prop="address">
             <el-input v-model="form.address" placeholder="住址"></el-input>
           </el-form-item>
         </el-col>
@@ -95,9 +95,6 @@
 </template>
 
 <script>
-  import axios from "axios";
-  import qs from "qs";
-
   export default {
     data() {
       return {
@@ -200,13 +197,22 @@
       this.form.medicalRecord = 6100000;
     },
     methods: {
-      getPatientInfo(medicalID){
+      getPatientInfo(medicalID) {
         this.form.name = "刘大力";
         this.form.sex = "男";
         this.form.birth = "1980-03-01";
         this.form.age = "40";
         this.form.address = "辽宁省沈阳市";
         this.form.idNumber = "211202198003018888";
+      },
+      checkAge() {
+        if (isNaN(this.form.age)) {
+          this.$message.error("无效的年龄输入！");
+          this.form.age = "";
+        } else if (this.form.age < 0) {
+          this.$message.error("年龄不应为负！");
+          this.form.age = "";
+        }
       },
       /*提交挂号*/
       submitForm(formName) {
@@ -244,7 +250,7 @@
         //    进行比较
         if (oldTime > new Date().getTime()) {
           this.$message.error('无效出生日期！');
-          this.form.date = "";
+          this.form.birth = "";
         } else {
           var birthYear = birthday.substr(0, 4);
           var hisAge = new Date().getFullYear() - birthYear + 1;
@@ -269,7 +275,8 @@
   .el-select {
     display: block;
   }
-  ::-webkit-scrollbar{
-  display:none;
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 </style>
