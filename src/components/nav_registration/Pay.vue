@@ -123,19 +123,23 @@ export default {
   methods: {
     //获取用户病历信息
     getPatient() {
-      this.loading = true;
+      if(this.filters.medicalRecord_id==''){
+        this.$message.error('请输入病历号');
+      }else{
+        this.loading = true;
 
-      setTimeout(() => {
-        this.patient.patient_id = this.filters.medicalRecord_id;
-        this.patient.name = "小明";
-        this.patient.idNumber = "";
-        this.getPaymentItem();
+        setTimeout(() => {
+          this.patient.patient_id = this.filters.medicalRecord_id;
+          this.patient.name = "小明";
+          this.patient.idNumber = "";
+          this.getPaymentItem();
 
-        this.$message({
-          message: "已获取病历信息！",
-          type: "success"
-        });
-      }, 1500);
+          this.$message({
+            message: "已获取病历信息！",
+            type: "success"
+          });
+        }, 1500);
+      }
     },
     getPaymentItem() {
       this.paymentItem = [

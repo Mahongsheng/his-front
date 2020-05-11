@@ -127,28 +127,37 @@ export default {
           value: 'operationDepartment',
           label: '执行科室'
         }],
-        value: ''
-
+        value: '',
+        key: 0
 
           
       };
     },
     methods:{
         exportData(){
-            this.$confirm("确认导出吗?", "提示", {
-            type: "warning"
-        }).then(() => {
-            this.searchLoading = true;
+          if(this.key==0){
+            this.$message.error('先进行查询');
+          }else{
+              this.$confirm("确认导出吗?", "提示", {
+              type: "warning"
+          }).then(() => {
+              this.searchLoading = true;
 
-            setTimeout(() => {
-            this.$message({
-                message: "导出成功",
-                type: "success"
-            });
-            }, 1500);
-            });
+              setTimeout(() => {
+              this.$message({
+                  message: "导出成功",
+                  type: "success"
+              });
+              }, 1500);
+              });
+          }
         },
         search(){
+         if(this.form.dateStart=='' || this.form.dateEnd==''){
+          this.$message.error('请将查询条件填写完整');
+         }
+         else {
+           this.key = 1;
             this.tableResult = [{
             name: '门诊医生',
             number: 19,
@@ -247,7 +256,7 @@ export default {
             others:47,
           }];
         }
-          
+        }
     }
 };
 </script>

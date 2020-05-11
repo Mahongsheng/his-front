@@ -121,7 +121,10 @@ export default {
     },
     methods:{
         search(){
-         if (this.form.dateStart=='') {
+        if(this.form.id==''){
+           this.$message.error('请输入病历号');
+        }
+        else if (this.form.dateStart=='') {
             this.resultForm.totalMoney = 0
             this.tableResult = [{
             date: '2020-05-07',
