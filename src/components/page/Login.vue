@@ -12,7 +12,7 @@
         label-width="0px"
         class="demo-ruleForm login-page"
       >
-        <h2 class="title">HIS系统登录</h2>
+        <h2 class="title"><img src="../../assets/logo.svg" class="logo" > HIS系统登录</h2>
         <el-form-item prop="username">
           <el-input
             autofocus
@@ -111,5 +111,10 @@ export default {
 .title {
   text-align: center;
   margin-bottom: 50px;
+}
+
+.logo {
+  width: 35px;
+  vertical-align: middle;
 }
 </style>
