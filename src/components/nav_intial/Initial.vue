@@ -1,15 +1,12 @@
 <template>
-
       <el-container class="container" style="width:100%">
-
-
           <div class="whole">
             <h1 style="color: #364766; font-size: 30px">本系统模块介绍：</h1>
 
             <el-row :span="24" :gutter="20" >
               <el-col :span="8" class="block">
                 <strong>门诊挂号收费模块</strong> <br> <br>
-                该模块负责挂号业务以及收费业务，且涉及相关的费用管理。<br>
+                该模块包含挂号业务、收费业务以及相关的收费员日结、费用管理等。<br>
                 其包含的子功能如下：
                 <ul>
                   <li>门诊挂号</li>
@@ -83,15 +80,9 @@
                 </ul>
               </el-col>
             </el-row>
-
-
           </div>
-
-
           <router-view/>
-
       </el-container>
-
 </template>
 
 <script>
@@ -131,4 +122,3 @@
 
   }
 </style>
-

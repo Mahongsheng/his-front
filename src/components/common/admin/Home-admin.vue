@@ -4,7 +4,6 @@
       <el-container class="container" style="width:100%">
         <el-aside width="220px"><v-sidebar></v-sidebar></el-aside>
         <el-main class="main">
-
           <router-view/>
         </el-main>
       </el-container>
@@ -35,7 +34,6 @@
 
   .block {
     color: #364766;
-
 
     -webkit-border-radius: 15px;
     border-radius: 20px;

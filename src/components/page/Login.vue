@@ -4,7 +4,6 @@
   <div class="login-container">
 
     <div class="login_form">
-
       <el-form
         :model="user"
         status-icon

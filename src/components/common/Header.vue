@@ -1,14 +1,19 @@
 <template>
-  <div class="header">
-    <div class="glowIn">HIS 东软云医院</div>
-    <div class="user-info">
-      <el-dropdown trigger="click" @command="handleCommand">
-                <span class="el-dropdown-link" v-text="user.username"></span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="logout">退出登陆</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </div>
+  <div class="header" style="display: inline-block;">
+    <el-col :span="18">
+      <div class="glowIn" style="vertical-align: middle;">HIS 东软云医院</div>
+    </el-col>
+    <el-col :span="6">
+      <div class="user-info">
+        <el-dropdown trigger="click" @command="handleCommand">
+          <span class="el-dropdown-link" style="color: #364766;" v-text="user.username + '医生'"></span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="logout">退出登陆</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+    </el-col>
+
   </div>
 </template>
 
@@ -28,13 +33,11 @@
     created() {
       this.user.username = sessionStorage.getItem("user");
       this.user.permission = sessionStorage.getItem("permission");
-    }
-    ,
+    },
     methods: {
       handleCommand(command) {
         if (command === 'logout') {
-          this.$confirm('确认退出吗?', '提示', {
-          }).then(() => {
+          this.$confirm('确认退出吗?', '提示', {}).then(() => {
             sessionStorage.removeItem('user');
             this.$router.push('/login');
             this.$message({
@@ -57,12 +60,12 @@
     font-size: 22px;
     line-height: 70px;
     color: #fff;
-    background: linear-gradient(to top right,  #d3dce6, #e5e9f2, #99a9bf);
+    background: linear-gradient(to top right, #d3dce6, #e5e9f2, #99a9bf);
     margin: 0;
 
 
-    filter:alpha(Opacity=85);
-    -moz-opacity:0.75;
+    filter: alpha(Opacity=85);
+    -moz-opacity: 0.75;
     opacity: 0.75;
 
     /*background-image: url("../../assets/bg2.jpg");*/
@@ -113,13 +116,16 @@
     from {
       opacity: 0;
     }
+
     65% {
       opacity: 1;
       text-shadow: 0 0 25px white;
     }
+
     75% {
       opacity: 1;
     }
+
     to {
       opacity: 0.7;
     }
