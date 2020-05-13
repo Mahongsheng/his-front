@@ -268,6 +268,7 @@ export default {
             others:47,
           }];
          } else {
+            this.key = 1;
             this.tableResult = [{
             name: '全科门诊',
             number: 100,
