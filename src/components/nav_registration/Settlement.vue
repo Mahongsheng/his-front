@@ -146,16 +146,20 @@
         }, 1500);
       },
       handleSettlement() {
-        this.loading = true;
-        setTimeout(() => {
-          this.settlementItem = [];
-          this.wholeMoney = '';
-          this.$message({
-            message: "已完成结算报账",
-            type: "success"
-          });
-          this.loading = false;
-        }, 1500);
+        this.$confirm("您确认进行结算报账？记录：5条 总额：100元", "提示", {
+          type: "warning"
+        }).then(() => {
+          this.loading = true;
+          setTimeout(() => {
+            this.settlementItem = [];
+            this.wholeMoney = '';
+            this.loading = false;
+            this.$message({
+              message: "已完成结算报账",
+              type: "success"
+            });
+          }, 1500);
+        });
       }
     }
   }
